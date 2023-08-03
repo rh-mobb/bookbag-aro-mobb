@@ -1,0 +1,136 @@
+:source-highlighter: highlight.js
+:highlightjs-languages: adoc
+:markup-in-source: verbatim,quotes
+
+
+=== No ARO Deployment
+
+:aro_console: %aro_console%
+ifeval::["{aro_console}" != "%aro_console%"]
+:aro_deployed: true
+endif::[]
+:preconfigure_aad: %preconfigure_aad%
+ifeval::["{preconfigure_aad}" != "%preconfigure_aad%"]
+:aad_preconfigured: true
+endif::[]
+
+[source,adoc]
+----
+:aro_console: %aro_console%
+\ifeval::["{aro_console}" != "%aro_console%"]
+:aro_deployed: true
+\endif::[]
+:preconfigure_aad: %preconfigure_aad%
+\ifeval::["{preconfigure_aad}" != "%preconfigure_aad%"]
+\:aad_preconfigured: true
+\endif::[]
+
+\ifdef::aro_deployed[]
+You only see this if ARO is deployed.
+\endif::[]
+
+\ifndef::aro_deployed[]
+You only see this if ARO is NOT deployed.
+\endif::[]
+----
+
+ifdef::aro_deployed[]
+You only see this if ARO is deployed.
+endif::[]
+
+ifndef::aro_deployed[]
+You only see this if ARO is NOT deployed.
+endif::[]
+
+=== ARO deployed, no AAD
+
+:aro_console: "http://example.com:6443"
+ifeval::["{aro_console}" != "%aro_console%"]
+:aro_deployed: true
+endif::[]
+:preconfigure_aad: %preconfigure_aad%
+ifeval::["{preconfigure_aad}" != "%preconfigure_aad%"]
+:aad_preconfigured: true
+endif::[]
+
+[source,adoc]
+----
+:aro_console: "http://example.com:6443"
+\ifeval::["{aro_console}" != "%aro_console%"]
+:aro_deployed: true
+\endif::[]
+:preconfigure_aad: %preconfigure_aad%
+\ifeval::["{preconfigure_aad}" != "%preconfigure_aad%"]
+:aad_preconfigured: true
+\endif::[]
+
+\ifdef::aro_deployed[]
+ARO is deployed here: {aro_console}, AAD is
+\ifndef::aad_preconfigured[]
+NOT
+\endif::aad_preconfigured[]
+configured.
+\endif::aro_deployed[]
+----
+
+ifdef::aro_deployed[]
+ARO is deployed here: {aro_console}, AAD is
+ifndef::aad_preconfigured[]
+NOT
+endif::aad_preconfigured[]
+configured.
+endif::aro_deployed[]
+
+=== ARO deployed, yes AAD
+
+:aro_console: "http://example.com:6443"
+ifeval::["{aro_console}" != "%aro_console%"]
+:aro_deployed: true
+endif::[]
+:preconfigure_aad: true
+ifeval::["{preconfigure_aad}" != "%preconfigure_aad%"]
+:aad_preconfigured: true
+endif::[]
+
+[source,adoc]
+----
+:aro_console: "http://example.com:6443"
+\ifeval::["{aro_console}" != "%aro_console%"]
+:aro_deployed: true
+\endif::[]
+:preconfigure_aad: true
+\ifeval::["{preconfigure_aad}" != "%preconfigure_aad%"]
+:aad_preconfigured: true
+\endif::[]
+
+\ifdef::aro_deployed[]
+ARO is deployed here: {aro_console}, AAD is
+\ifndef::aad_preconfigured[]
+NOT
+\endif::aad_preconfigured[]
+configured.
+\endif::aro_deployed[]
+----
+
+ifdef::aro_deployed[]
+ARO is deployed here: {aro_console}, AAD is
+ifndef::aad_preconfigured[]
+NOT
+endif::aad_preconfigured[]
+configured.
+endif::aro_deployed[]
+
+=== Single Line Examples
+
+[source,adoc]
+----
+Remember, AsciiDoc ignores single linebreaks.
+\ifdef::aro_deployed[You can access your ARO console here: {aro_console}]
+
+\ifdef::aad_preconfigured[AAD is Preconfigured]
+----
+
+Remember, AsciiDoc ignores single linebreaks.
+ifdef::aro_deployed[You can access your ARO console here: {aro_console}]
+
+ifdef::aad_preconfigured[AAD is Preconfigured]
