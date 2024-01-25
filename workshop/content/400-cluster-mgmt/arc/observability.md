@@ -25,7 +25,12 @@
     ```bash
     token=$(oc -n azure-arc get secret azure-arc-observability-secret -o jsonpath='{$.data.token}' | base64 -d)
     ```
+1. Then, we can obtain the token for Azure Arc. To do so, run the following command:
 
+    ```bash
+    echo $token
+    ```
+    
     Make sure you copy this value, as you'll need it in a moment.
 
 
