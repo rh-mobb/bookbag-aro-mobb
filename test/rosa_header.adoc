@@ -1,0 +1,71 @@
+:source-highlighter: highlight.js
+:highlightjs-languages: adoc
+:markup-in-source: verbatim,quotes
+
+
+=== No ROSA Deployment
+
+:rosa_console_url: %rosa_console_url%
+ifeval::["{rosa_console_url}" != "%rosa_console_url%"]
+:rosa_deployed: true
+endif::[]
+
+[source,adoc]
+----
+:rosa_console_url: %rosa_console_url%
+\ifeval::["{rosa_console_url}" != "%rosa_console_url%"]
+:rosa_deployed: true
+\endif::[]
+
+\ifdef::rosa_deployed[]
+You only see this if ROSA is deployed.
+\endif::[]
+
+\ifndef::rosa_deployed[]
+You only see this if ROSA is NOT deployed.
+\endif::[]
+----
+
+ifdef::rosa_deployed[]
+You only see this if ROSA is deployed.
+endif::[]
+
+ifndef::rosa_deployed[]
+You only see this if ROSA is NOT deployed.
+endif::[]
+
+=== ROSA deployed
+
+:rosa_console_url: "http://example.com:6443"
+ifeval::["{rosa_console_url}" != "%rosa_console_url%"]
+:rosa_deployed: true
+endif::[]
+
+[source,adoc]
+----
+:rosa_console_url: "http://example.com:6443"
+\ifeval::["{rosa_console_url}" != "%rosa_console_url%"]
+:rosa_deployed: true
+\endif::[]
+
+\ifdef::rosa_deployed[]
+ROSA is deployed here: {rosa_console_url}
+\endif::rosa_deployed[]
+----
+
+ifdef::rosa_deployed[]
+ROSA is deployed here: {rosa_console_url}
+endif::rosa_deployed[]
+
+=== Single Line Examples
+
+[source,adoc]
+----
+Remember, AsciiDoc ignores single linebreaks.
+\ifdef::rosa_deployed[You can access your ROSA console here: {rosa_console_url}]
+
+\ifdef::aad_preconfigured[AAD is Preconfigured]
+----
+
+Remember, AsciiDoc ignores single linebreaks.
+ifdef::rosa_deployed[You can access your ROSA console here: {rosa_console_url}]
