@@ -83,6 +83,33 @@ $ *oc start-build bookbag --follow*
 NOTE: Nested json data is now flattened and joined with a `.`.
 Use in your asciidoc: %my.deep.var%
 
+=== Conditional Content
+
+You can use values from `workshop-vars.json` to show or hide sections of a
+module. Define the variable at the top of the module, then use AsciiDoc
+conditionals around the content that depends on that value.
+
+[source,adoc]
+----
+:preconfigure_aad: %preconfigure_aad%
+
+ifeval::[{preconfigure_aad} == true]
+Your ARO cluster has been preconfigured with Azure AD.
+endif::[]
+
+ifeval::[{preconfigure_aad} == false]
+Complete the Azure AD configuration steps in this module.
+endif::[]
+----
+
+Variables can also be used directly in module text after they are provided by
+`WORKSHOP_VARS`:
+
+[source,adoc]
+----
+Open the ARO console at %aro_console%.
+----
+
 . Process the deploy template with your `workshop-vars.json`:
 +
 [source,subs="{markup-in-source}"]
